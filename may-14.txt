@@ -1,0 +1,151 @@
+Task :Create three different  tables on different sectors ?
+sql: 1.table of car_details :
+mysql> create database 93u;
+show databases;
++--------------------+
+| Database           |
++--------------------+
+| 37r                |
+| 93u                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+mysql> create table car_details(name varchar(20),year int,bhp int,brand varchar(20));
+mysql> desc car_details;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(20) | YES  |     | NULL    |       |
+| year  | int         | YES  |     | NULL    |       |
+| bhp   | int         | YES  |     | NULL    |       |
+| brand | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+mysql> insert into car_details values("supra",1994,335,"toyota");
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into car_details values("golfgti",2024,245,"volkswagen");
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into car_details values("lancerevox",2007,291,"mitsubishi");
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into car_details values("polo",2024,145,"volkswagen");
+Query OK, 1 row affected (0.01 sec)
+
+In the similar manner I have inserted all the remaining fields into this table 
+result:
+mysql> select * from car_details;
++----------------+------+------+------------+
+| name           | year | bhp  | brand      |
++----------------+------+------+------------+
+| supra          | 1994 |  335 | toyota     |
+| civic          | 1972 |  315 | honda      |
+| Subaru Impreza | 2002 |  256 | subaru     |
+| golfgti        | 2024 |  245 | volkswagen |
+| polo           | 2024 |  145 | volkswagen |
+| lancerevox     | 2007 |  291 | mitsubishi |
+| rx73gen        | 1985 |  234 | mazada     |
+| m5cs           | 2008 |  647 | bmw        |
+| r8             | 2008 |  420 | audi       |
+| flying spur    | 2005 |  626 | bentely    |
++----------------+------+------+------------+
+10 rows in set (0.00 sec)
+          
+ 2.table on student_info:
+ create database 46r;
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| 37r                |
+| 46r                |
+| 93u                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (0.00 sec)
+mysql> insert into student_info(name,rollno,fathername,mob) values("udhay",93,"srinivasrao",98496);
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into student_info(name,rollno,fathername,mob) values("vinay",39,"srinivasrao",93486);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student_info(name,rollno,fathername,mob) values("aditya",32,"ramesh",00007);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student_info(name,rollno,fathername,mob) values("jaswanth",22,"ramesh",00007);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student_info(name,rollno,fathername,mob) values("akhil",23,"ventakeshwarlu",876543);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student_info(name,rollno,fathername,mob) values("sumanth",24,"satyanarayana",827685);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student_info(name,rollno,fathername,mob) values("bharat",25,"mukesh",765898);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student_info(name,rollno,fathername,mob) values("rakesh",26,"sukesh",7985435);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student_info(name,rollno,fathername,mob) values("jyothish",27,"akesh",99892423);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into student_info(name,rollno,fathername,mob) values("kiran",29,"pullaihh",675489);
+Query OK, 1 row affected (0.01 sec)
+
+result:
+        mysql> select * from student_info;
++----------+--------+----------------+----------+
+| name     | rollno | fathername     | mob      |
++----------+--------+----------------+----------+
+| udhay    |     93 | srinivasrao    |    98496 |
+| vinay    |     39 | srinivasrao    |    93486 |
+| aditya   |     32 | ramesh         |        7 |
+| jaswanth |     22 | ramesh         |        7 |
+| akhil    |     23 | ventakeshwarlu |   876543 |
+| sumanth  |     24 | satyanarayana  |   827685 |
+| bharat   |     25 | mukesh         |   765898 |
+| rakesh   |     26 | sukesh         |  7985435 |
+| jyothish |     27 | akesh          | 99892423 |
+| kiran    |     29 | pullaihh       |   675489 |
++----------+--------+----------------+----------+
+10 rows in set (0.00 sec)
+
+3.table of salaries of employees :
+create database 10k;
+mysql> use 10k;
+Database changed
+
+mysql> insert into salary_details values("udhay","fullstack",2,"thirty thousand inr");
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into salary_details values("akhil","python",2,"fourlakh inr");
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into salary_details values("sumanth","ui/ux",2,"thirty thousand");
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into salary_details values("kiran","revenue",6,"forutyfive thousand");
+Query OK, 1 row affected (0.01 sec)
+
+IN the similar way I have inserted all the remaining fields into the table by insert into command:
+result is :
+             mysql> select * from salary_details;
++-----------+----------------+------------+---------------------+
+| name      | domain         | experience | salary              |
++-----------+----------------+------------+---------------------+
+| udhay     | fullstack      |          2 | thirty thousand inr |
+| akhil     | python         |          2 | fourlakh inr        |
+| bharat    | aws            |          3 | six lakhs           |
+| rakesh    | enterprenuer   |          1 | ten lakhs           |
+| sumanth   | ui/ux          |          2 | thirty thousand     |
+| aditya    | javascript     |          3 | eighty thousand     |
+| jaswanth  | sql            |          4 | sixtyfive thousand  |
+| kiran     | revenue        |          6 | forutyfive thousand |
+| poojitha  | shellscripting |          3 | two lakh            |
+| harshitha | aws            |          1 | fifty thousand      |
+| ram       | python         |          2 | sixty thousand      |
++-----------+----------------+------------+---------------------+
+11 rows in set (0.00 sec)
