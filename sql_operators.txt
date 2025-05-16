@@ -1,0 +1,199 @@
+Task : CREATE TABLE Students (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    age INT,
+    grade CHAR(1),
+    city VARCHAR(50)
+);
+
+INSERT INTO Students (id, name, age, grade, city) VALUES
+(1, 'Alice', 19, 'A', 'Mumbai'),
+(2, 'Bob', 21, 'B', 'Delhi'),
+(3, 'Charlie', 18, 'C', 'Jaipur'),
+(4, 'David', 20, 'A', 'Hyderabad'),
+(5, 'Eva', 22, 'B', 'Bhopal'),
+(6, 'Frank', 17, 'C', 'Chandigarh'),
+(7, 'Grace', 19, 'A', 'Chennai');
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| cars               |
+| hotel_swagruha     |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| students           |
+| sys                |
+| uday               |
+| world              |
++--------------------+
+10 rows in set (0.01 sec)
+
+mysql> USE STUDENTS;
+Database changed
+mysql> SHOW TABLES;
++--------------------+
+| Tables_in_students |
++--------------------+
+| progresscard       |
++--------------------+
+1 row in set (0.02 sec)
+
+mysql> DESC PROGRESSCARD;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| grade | char(1)     | YES  |     | NULL    |       |
+| city  | varchar(50) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> SELECT * FROM PROGRESSCARD;
++------+---------+------+-------+------------+
+| id   | name    | age  | grade | city       |
++------+---------+------+-------+------------+
+|    1 | Alice   |   21 | c     | Mumbai     |
+|    2 | BOB     |   21 | B     | DELHI      |
+|    3 | CHARLIE |   18 | C     | JAIPUR     |
+|    4 | DAVID   |   20 | A     | HYDERABAD  |
+|    5 | EVA     |   22 | B     | BHOPAL     |
+|    6 | FRANK   |   17 | C     | CHANDIGARH |
+|    7 | GRACE   |   19 | A     | CHENNAI    |
++------+---------+------+-------+------------+
+7 rows in set (0.00 sec)
+Retrieve all students whose age is greater than 18.
+mysql> SELECT * FROM PROGRESSCARD WHERE AGE>18;
++------+-------+------+-------+-----------+
+| id   | name  | age  | grade | city      |
++------+-------+------+-------+-----------+
+|    1 | Alice |   21 | c     | Mumbai    |
+|    2 | BOB   |   21 | B     | DELHI     |
+|    4 | DAVID |   20 | A     | HYDERABAD |
+|    5 | EVA   |   22 | B     | BHOPAL    |
+|    7 | GRACE |   19 | A     | CHENNAI   |
++------+-------+------+----
+Retrieve students whose grade is not equal to 'A'.
+mysql> SELECT * FROM PROGRESSCARD WHERE GRADE<>"A";
++------+---------+------+-------+------------+
+| id   | name    | age  | grade | city       |
++------+---------+------+-------+------------+
+|    1 | Alice   |   21 | c     | Mumbai     |
+|    2 | BOB     |   21 | B     | DELHI      |
+|    3 | CHARLIE |   18 | C     | JAIPUR     |
+|    5 | EVA     |   22 | B     | BHOPAL     |
+|    6 | FRANK   |   17 | C     | CHANDIGARH |
++------+---------+------+-------+------------+
+
+ Retrieve students whose age is between 18 and 21 (inclusive).
+mysql> SELECT * FROM PROGRESSCARD WHERE AGE BETWEEN 18 AND 21;
++------+---------+------+-------+-----------+
+| id   | name    | age  | grade | city      |
++------+---------+------+-------+-----------+
+|    1 | Alice   |   21 | c     | Mumbai    |
+|    2 | BOB     |   21 | B     | DELHI     |
+|    3 | CHARLIE |   18 | C     | JAIPUR    |
+|    4 | DAVID   |   20 | A     | HYDERABAD |
+|    7 | GRACE   |   19 | A     | CHENNAI   |
++------+---------+------+-------+-----------+
+ Retrieve students whose age is greater than 18 AND grade is 'A'.
+mysql> SELECT * FROM PROGRESSCARD WHERE AGE>18 AND GRADE="A";
++------+-------+------+-------+-----------+
+| id   | name  | age  | grade | city      |
++------+-------+------+-------+-----------+
+|    4 | DAVID |   20 | A     | HYDERABAD |
+|    7 | GRACE |   19 | A     | CHENNAI   |
++------+-------+------+-------+-----------+
+ Retrieve students from Delhi OR Jaipur.
+mysql> SELECT * FROM PROGRESSCARD WHERE CITY="DELHI" OR CITY="JAIPUR";
++------+---------+------+-------+--------+
+| id   | name    | age  | grade | city   |
++------+---------+------+-------+--------+
+|    2 | BOB     |   21 | B     | DELHI  |
+|    3 | CHARLIE |   18 | C     | JAIPUR |
++------+---------+------+-------+--------+
+ Retrieve students who are NOT from Mumbai.
+mysql> SELECT * FROM PROGRESSCARD WHERE CITY<>"MUMBAI";
++------+---------+------+-------+------------+
+| id   | name    | age  | grade | city       |
++------+---------+------+-------+------------+
+|    2 | BOB     |   21 | B     | DELHI      |
+|    3 | CHARLIE |   18 | C     | JAIPUR     |
+|    4 | DAVID   |   20 | A     | HYDERABAD  |
+|    5 | EVA     |   22 | B     | BHOPAL     |
+|    6 | FRANK   |   17 | C     | CHANDIGARH |
+|    7 | GRACE   |   19 | A     | CHENNAI    |
++------+---------+------+-------+------------+
+Display each student’s name and their age increased by 1.
+mysql> SELECT NAME,AGE+1 AS INCREASED_AGE FROM PROGRESSCARD;
++---------+---------------+
+| NAME    | INCREASED_AGE |
++---------+---------------+
+| Alice   |            22 |
+| BOB     |            22 |
+| CHARLIE |            19 |
+| DAVID   |            21 |
+| EVA     |            23 |
+| FRANK   |            18 |
+| GRACE   |            20 |
++---------+---------------+
+Retrieve students whose age multiplied by 2 is greater than 40.
+mysql> SELECT NAME FROM PROGRESSCARD WHERE AGE*2>40;
++-------+
+| NAME  |
++-------+
+| Alice |
+| BOB   |
+| EVA   |
++-------+
+ Retrieve students whose name starts with 'A'.
+mysql> SELECT NAME FROM PROGRESSCARD WHERE NAME LIKE"A%";
++-------+
+| NAME  |
++-------+
+| Alice |
++-------+
+Retrieve students whose city ends with 'pur'.
+mysql> SELECT NAME FROM PROGRESSCARD WHERE CITY LIKE "%PUR";
++---------+
+| NAME    |
++---------+
+| CHARLIE |
++---------+
+Retrieve students whose name contains the letter 'a' (case-insensitive).
+mysql> SELECT NAME FROM PROGRESSCARD WHERE NAME LIKE "%A%";
++---------+
+| NAME    |
++---------+
+| Alice   |
+| CHARLIE |
+| DAVID   |
+| EVA     |
+| FRANK   |
+| GRACE   |
++---------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
