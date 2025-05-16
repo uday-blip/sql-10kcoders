@@ -1,0 +1,88 @@
+task : create tables with fields containing different date types (decimal,date,datetime)
+table 1.shop_transactions :
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| hotel_swagruha     |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| uday               |
+| world              |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> use uday;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_uday    |
++-------------------+
+| shop_transactions |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> desc shop_transactions;
++----------------+---------------+------+-----+---------+-------+
+| Field          | Type          | Null | Key | Default | Extra |
++----------------+---------------+------+-----+---------+-------+
+| customer       | varchar(20)   | YES  |     | NULL    |       |
+| date_of_credit | datetime      | YES  |     | NULL    |       |
+| amount         | decimal(10,2) | YES  |     | NULL    |       |
+| date_to_pay    | datetime      | YES  |     | NULL    |       |
+| status_credit  | varchar(20)   | YES  |     | NULL    |       |
++----------------+---------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from shop_transactions;
++----------+---------------------+---------+---------------------+------------------+
+| customer | date_of_credit      | amount  | date_to_pay         | status_credit    |
++----------+---------------------+---------+---------------------+------------------+
+| akhil    | 2025-03-24 10:00:00 |  342.56 | 2025-04-24 10:00:00 | paid             |
+| uday     | 2025-02-15 10:34:00 |  445.56 | 2025-04-15 10:45:00 | pending          |
+| vinay    | 2025-03-12 12:45:00 |  556.56 | 2025-05-12 12:45:00 | paid             |
+| bharat   | 2025-04-13 16:45:00 | 1000.89 | 2025-05-16 16:45:00 | customer escaped |
+| sumanth  | 2025-04-24 09:56:00 |  765.67 | 2025-05-23 16:43:00 | unpaid           |
+| rakesh   | 2025-04-12 10:00:00 |  554.24 | 2025-04-24 12:00:00 | paid             |
++----------+---------------------+---------+---------------------+------------------+
+6 rows in set (0.00 sec)
+
+table 2:
+mysql> use hotel_swagruha;
+Database changed
+mysql> show tables;
++--------------------------+
+| Tables_in_hotel_swagruha |
++--------------------------+
+| log_book                 |
++--------------------------+
+1 row in set (0.00 sec)
+
+mysql> desc log_book
+    -> ;
++---------------+---------------+------+-----+---------+-------+
+| Field         | Type          | Null | Key | Default | Extra |
++---------------+---------------+------+-----+---------+-------+
+| customer_name | varchar(20)   | YES  |     | NULL    |       |
+| checked_in    | date          | YES  |     | NULL    |       |
+| checked_out   | datetime      | YES  |     | NULL    |       |
+| days_spent    | int           | YES  |     | NULL    |       |
+| amount_paid   | decimal(10,2) | YES  |     | NULL    |       |
++---------------+---------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> select * from log_book;
++---------------+------------+---------------------+------------+-------------+
+| customer_name | checked_in | checked_out         | days_spent | amount_paid |
++---------------+------------+---------------------+------------+-------------+
+| uday          | 2025-04-19 | 2025-04-21 10:32:00 |          2 |     2057.79 |
+| akhil         | 2025-04-18 | 2025-04-21 10:32:54 |          2 |     2025.57 |
+| bharat        | 2025-04-18 | 2025-04-30 12:35:00 |         13 |     8765.89 |
+| rakesh        | 2025-03-10 | 2025-03-13 10:43:00 |          3 |     2054.43 |
+| sumanth       | 2025-03-23 | 2025-03-24 09:35:00 |          1 |      998.12 |
++---------------+------------+---------------------+------------+-------------+
+5 rows in set (0.00 sec)
