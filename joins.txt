@@ -1,0 +1,87 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| movies             |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
++--------------------+
+mysql> show tables;
++------------------+
+| Tables_in_movies |
++------------------+
+| movie            |
+| theatre          |
++------------------+
+mysql> select * from movie;
++----------+---------+-----------+---------+------------+--------+
+| title    | hero    | director  | villain | collection | rating |
++----------+---------+-----------+---------+------------+--------+
+| bahubali | prabhas | rajamouli | rana    |       1800 |    4.6 |
+| puspa    | AA      | sukku     | fafa    |       2000 |    4.0 |
++----------+---------+-----------+---------+------------+--------+
+mysql> select * from theatre;
++-----------+--------+-----------+--------------+---------+
+| name      | screen | location  | movie_played | runtime |
++-----------+--------+-----------+--------------+---------+
+| sandya    |     70 | rtcxroads | bahubali     |     0.3 |
+| gokul     |     70 | abids     | pokiri       |     2.4 |
+| sudrashan |     70 | rtcxroads | gunturkaram  |     2.4 |
+| sandya    |     70 | rtcxroads | puspa        |     3.1 |
++-----------+--------+-----------+--------------+---------+
+mysql> insert into movie values("gabbarsingh","pK","harishsankar","venu",400,4.1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from movie;
++-------------+---------+--------------+---------+------------+--------+
+| title       | hero    | director     | villain | collection | rating |
++-------------+---------+--------------+---------+------------+--------+
+| bahubali    | prabhas | rajamouli    | rana    |       1800 |    4.6 |
+| puspa       | AA      | sukku        | fafa    |       2000 |    4.0 |
+| gabbarsingh | pK      | harishsankar | venu    |        400 |    4.1 |
++-------------+---------+--------------+---------+------------+--------+
+mysql> select * from movie inner join theatre on movie.title=theatre.movie_played;
++----------+---------+-----------+---------+------------+--------+--------+--------+-----------+--------------+---------+
+| title    | hero    | director  | villain | collection | rating | name   | screen | location  | movie_played | runtime |
++----------+---------+-----------+---------+------------+--------+--------+--------+-----------+--------------+---------+
+| bahubali | prabhas | rajamouli | rana    |       1800 |    4.6 | sandya |     70 | rtcxroads | bahubali     |     0.3 |
+| puspa    | AA      | sukku     | fafa    |       2000 |    4.0 | sandya |     70 | rtcxroads | puspa        |     3.1 |
++----------+---------+-----------+---------+------------+--------+--------+--------+-----------+--------------+---------+
+mysql> select * from movie left join theatre on movie.title=theatre.movie_played;
++-------------+---------+--------------+---------+------------+--------+--------+--------+-----------+--------------+---------+
+| title       | hero    | director     | villain | collection | rating | name   | screen | location  | movie_played | runtime |
++-------------+---------+--------------+---------+------------+--------+--------+--------+-----------+--------------+---------+
+| bahubali    | prabhas | rajamouli    | rana    |       1800 |    4.6 | sandya |     70 | rtcxroads | bahubali     |     0.3 |
+| puspa       | AA      | sukku        | fafa    |       2000 |    4.0 | sandya |     70 | rtcxroads | puspa        |     3.1 |
+| gabbarsingh | pK      | harishsankar | venu    |        400 |    4.1 | NULL   |   NULL | NULL      | NULL         |    NULL |
++-------------+---------+--------------+---------+------------+--------+--------+--------+-----------+--------------+---------+
+mysql> select * from movie right join theatre on movie.title=theatre.movie_played;
++----------+---------+-----------+---------+------------+--------+-----------+--------+-----------+--------------+---------+
+| title    | hero    | director  | villain | collection | rating | name      | screen | location  | movie_played | runtime |
++----------+---------+-----------+---------+------------+--------+-----------+--------+-----------+--------------+---------+
+| bahubali | prabhas | rajamouli | rana    |       1800 |    4.6 | sandya    |     70 | rtcxroads | bahubali     |     0.3 |
+| NULL     | NULL    | NULL      | NULL    |       NULL |   NULL | gokul     |     70 | abids     | pokiri       |     2.4 |
+| NULL     | NULL    | NULL      | NULL    |       NULL |   NULL | sudrashan |     70 | rtcxroads | gunturkaram  |     2.4 |
+| puspa    | AA      | sukku     | fafa    |       2000 |    4.0 | sandya    |     70 | rtcxroads | puspa        |     3.1 |
++----------+---------+-----------+---------+------------+--------+-----------+--------+-----------+--------------+---------+
+mysql> select * from movie cross join theatre ;
++-------------+---------+--------------+---------+------------+--------+-----------+--------+-----------+--------------+---------+
+| title       | hero    | director     | villain | collection | rating | name      | screen | location  | movie_played | runtime |
++-------------+---------+--------------+---------+------------+--------+-----------+--------+-----------+--------------+---------+
+| gabbarsingh | pK      | harishsankar | venu    |        400 |    4.1 | sandya    |     70 | rtcxroads | bahubali     |     0.3 |
+| puspa       | AA      | sukku        | fafa    |       2000 |    4.0 | sandya    |     70 | rtcxroads | bahubali     |     0.3 |
+| bahubali    | prabhas | rajamouli    | rana    |       1800 |    4.6 | sandya    |     70 | rtcxroads | bahubali     |     0.3 |
+| gabbarsingh | pK      | harishsankar | venu    |        400 |    4.1 | gokul     |     70 | abids     | pokiri       |     2.4 |
+| puspa       | AA      | sukku        | fafa    |       2000 |    4.0 | gokul     |     70 | abids     | pokiri       |     2.4 |
+| bahubali    | prabhas | rajamouli    | rana    |       1800 |    4.6 | gokul     |     70 | abids     | pokiri       |     2.4 |
+| gabbarsingh | pK      | harishsankar | venu    |        400 |    4.1 | sudrashan |     70 | rtcxroads | gunturkaram  |     2.4 |
+| puspa       | AA      | sukku        | fafa    |       2000 |    4.0 | sudrashan |     70 | rtcxroads | gunturkaram  |     2.4 |
+| bahubali    | prabhas | rajamouli    | rana    |       1800 |    4.6 | sudrashan |     70 | rtcxroads | gunturkaram  |     2.4 |
+| gabbarsingh | pK      | harishsankar | venu    |        400 |    4.1 | sandya    |     70 | rtcxroads | puspa        |     3.1 |
+| puspa       | AA      | sukku        | fafa    |       2000 |    4.0 | sandya    |     70 | rtcxroads | puspa        |     3.1 |
+| bahubali    | prabhas | rajamouli    | rana    |       1800 |    4.6 | sandya    |     70 | rtcxroads | puspa        |     3.1 |
++-------------+---------+--------------+---------+------------+--------+-----------+--------+-----------+--------------+---------+
+12 rows in set (0.00 sec)
