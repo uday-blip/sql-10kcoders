@@ -1,0 +1,170 @@
+mysql> show schemas;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| movies             |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| task               |
+| uday               |
++--------------------+
+mysql> use task;
+Database changed
+mysql> set autocomit=0;
+mysql> create table employees(emp_id int , name varchar(20),department varchar(20),salary decimal (10,2));
+mysql> insert into employees values(1,"alice","hr",60000.0);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employees values(2,"bob","engineering",75000.0);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values(3,"charlie","marketing",50000.0);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> begin;
+
+mysql> select * from employees;
++--------+---------+-------------+----------+
+| emp_id | name    | department  | salary   |
++--------+---------+-------------+----------+
+|      1 | alice   | hr          | 60000.00 |
+|      2 | bob     | engineering | 75000.00 |
+|      3 | charlie | marketing   | 50000.00 |
+|      4 | uday    | devolper    | 70000.00 |
++--------+---------+-------------+----------+
+mysql> update employees set salary=65000 where emp_id=2;
+Query OK, 1 row affected (0.00 sec)
+mysql> select * from employees;
++--------+---------+-------------+----------+
+| emp_id | name    | department  | salary   |
++--------+---------+-------------+----------+
+|      1 | alice   | hr          | 60000.00 |
+|      2 | bob     | engineering | 65000.00 |
+|      3 | charlie | marketing   | 50000.00 |
+|      4 | uday    | devolper    | 70000.00 |
++--------+---------+-------------+----------+
+mysql> rollback;
+
+
+mysql> select * from employees;
++--------+---------+-------------+----------+
+| emp_id | name    | department  | salary   |
++--------+---------+-------------+----------+
+|      1 | alice   | hr          | 60000.00 |
+|      2 | bob     | engineering | 75000.00 |
+|      3 | charlie | marketing   | 50000.00 |
+|      4 | uday    | devolper    | 70000.00 |
++--------+---------+-------------+----------+
+mysql> create table products (prod_id int , prod_name varchar (50), price decimal (10,2));
+mysql> insert into products values(101,"laptop",10000.0);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into products values(102,"mouse",25.00);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into products values(103,"monitor",150.00);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from products;
++---------+-----------+----------+
+| prod_id | prod_name | price    |
++---------+-----------+----------+
+|     101 | laptop    | 10000.00 |
+|     102 | mouse     |    25.00 |
+|     103 | monitor   |   150.00 |
++---------+-----------+----------+
+mysql> insert into products values(104,"keyboard",230.00);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint change_price;
+ update products set price=320 where prod_id=104;
+Query OK, 1 row affected (0.00 sec)
+mysql> select * from products ;
++---------+-----------+----------+
+| prod_id | prod_name | price    |
++---------+-----------+----------+
+|     101 | laptop    | 10000.00 |
+|     102 | mouse     |    25.00 |
+|     103 | monitor   |   250.00 |
+|     104 | keyboard  |   320.00 |
++---------+-----------+----------+
+mysql> rollback to change_price;
+mysql> commit;
+
+mysql> insert into products values(105,"headphones",300);
+Query OK, 1 row affected (0.00 sec)
+mysql> commit;
+
+ysql> create table students (student_id int, name varchar(20), grade int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into students values(201,"emma",88);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into students values(202,"liam",92);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into students values (203,"noah",85);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from students;
++------------+------+-------+
+| student_id | name | grade |
++------------+------+-------+
+|        201 | emma |    88 |
+|        202 | liam |    92 |
+|        203 | noah |    85 |
++------------+------+-------+
+mysql> insert into students values(204,"uday",88);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into students values(205,"akhil",99);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from students ;
++------------+-------+-------+
+| student_id | name  | grade |
++------------+-------+-------+
+|        201 | emma  |    88 |
+|        202 | liam  |    92 |
+|        203 | noah  |    85 |
+|        204 | uday  |    88 |
+|        205 | akhil |    99 |
++------------+-------+-------+
+mysql> commit;
+
+mysql> insert into students values(205,"bharat",96);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from students ;
++------------+--------+-------+
+| student_id | name   | grade |
++------------+--------+-------+
+|        201 | emma   |    88 |
+|        202 | liam   |    92 |
+|        203 | noah   |    85 |
+|        205 | vinni  |    98 |
+|        205 | akhil  |    99 |
+|        205 | bharat |    96 |
++------------+--------+-------+
+6 rows in set (0.00 sec)
+
+mysql> rollback;
+mysql> select * from students ;
++------------+-------+-------+
+| student_id | name  | grade |
++------------+-------+-------+
+|        201 | emma  |    88 |
+|        202 | liam  |    92 |
+|        203 | noah  |    85 |
+|        205 | vinni |    98 |
+|        205 | akhil |    99 |
++------------+-------+-------+
+
+
+
+
+
