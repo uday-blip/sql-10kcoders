@@ -1,0 +1,103 @@
+
+mysql> show schemas;
++--------------------+
+| Database           |
++--------------------+
+| 37r                |
+| information_schema |
+| mob_store          |
+| movies             |
+| mysql              |
+| performance_schema |
+| stu_score          |
+| student_score      |
+| sys                |
+| task               |
++--------------------+
+10 rows in set (0.01 sec)
+
+mysql> use student_score;
+Database changed
+mysql> show tables;
++-------------------------+
+| Tables_in_student_score |
++-------------------------+
+| students                |
++-------------------------+
+1 row in set (0.01 sec)
+
+
+mysql> select * from students;
++----+---------+-------+-------+
+| id | name    | marks | total |
++----+---------+-------+-------+
+|  1 | Aarav   |   528 |   600 |
+|  2 | Diya    |   465 |   600 |
+|  3 | Vivaan  |   552 |   600 |
+|  4 | Anaya   |   390 |   600 |
+|  5 | Krishna |   488 |   600 |
+|  6 | Meera   |   545 |   600 |
+|  7 | Ishaan  |   498 |   600 |
+|  8 | Saanvi  |   573 |   600 |
+|  9 | Rohan   |   441 |   600 |
+| 10 | Kavya   |   534 |   600 |
++----+---------+-------+-------+
+10 rows in set (0.00 sec)
+
+delimter $$
+create procedure get_record(IN stu_name varchar(20))
+begin
+select * from student where name=stu_name;
+end$$
+delimiter ;
+
+mysql> call get_record("Kavya");
++----+-------+-------+-------+
+| id | name  | marks | total |
++----+-------+-------+-------+
+| 10 | Kavya |   534 |   600 |
++----+-------+-------+-------+
+1 row in set (0.00 sec)
+
+delimiter **
+create procedure above_300(IN min_score int)
+begin
+select * from student where marks>min_score;
+end**
+delimiter ;
+
+mysql> call above_300(300);
++----+---------+-------+-------+
+| id | name    | marks | total |
++----+---------+-------+-------+
+|  1 | Aarav   |   528 |   600 |
+|  2 | Diya    |   465 |   600 |
+|  3 | Vivaan  |   552 |   600 |
+|  4 | Anaya   |   390 |   600 |
+|  5 | Krishna |   488 |   600 |
+|  6 | Meera   |   545 |   600 |
+|  7 | Ishaan  |   498 |   600 |
+|  8 | Saanvi  |   573 |   600 |
+|  9 | Rohan   |   441 |   600 |
+| 10 | Kavya   |   534 |   600 |
++----+---------+-------+-------+
+10 rows in set (0.00 sec)
+
+delimiter ^^
+create procedure above_ninety_percent(IN required_above_score int)
+begin
+select * from student where marks>=required_above_score;
+end^^
+delimiter ;
+
+mysql> call above_ninety_percent(540);
++----+--------+-------+-------+
+| id | name   | marks | total |
++----+--------+-------+-------+
+|  3 | Vivaan |   552 |   600 |
+|  6 | Meera  |   545 |   600 |
+|  8 | Saanvi |   573 |   600 |
++----+--------+-------+-------+
+3 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
