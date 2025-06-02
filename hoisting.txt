@@ -1,0 +1,18 @@
+Hoisting is a default process where JavaScript “splits” var and function declarations from their definitions. These declarations are “moved up” to the top of the file above where they were defined and/or used. This means that JavaScript knows about these declarations before the rest of the code is executed.
+In javascript whatever the variables that are declared by using var are hoist-able completely because it supports re-declaration and re-assignment also.
+This process of hoisting works differentely for different type of variables that are declared in various ways by using var, let , const .
+for example  this case is variable declaration by using var :
+console.log(`My name is ${myName}.`);    
+var myName = 'Brandon';
+ // Output: My name is undefined. 
+During the execution phase, the code will refactor like this:
+var myName;
+console.log(`My name is ${myName}.`);
+myName = 'Brandon';
+ // Output: My name is undefined.
+If we tried to log a variable that hasn’t been defined yet, we’d get a ReferenceError:
+console.log(`My name is ${name}.`); // --> ReferenceError
+var myName = 'Brandon';
+
+This principle of hoisting also works for functions also but in a different way .
+
