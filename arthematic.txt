@@ -1,0 +1,49 @@
+use procedures;
+delimiter $$
+create procedure sum_two (IN n1 int, IN n2 int)
+begin
+select (n1+n2) as sum_two;
+end$$
+delimiter ;
+delimiter $$
+create procedure diff_two (IN n1 int, IN n2 int)
+begin
+select (n1-n2) as diff_two;
+end$$
+delimiter ;
+delimiter %%
+create procedure mul_two (IN n1 int , IN n2 int)
+begin
+select (n1*n2) as mul_two;
+end%%
+delimiter ;
+delimiter ^^
+create procedure divsion(IN n1 int , IN n2 int)
+begin
+select (n1/n2) as divsion;
+end^^
+delimiter ;
+delimiter &&
+create procedure percentage(IN n1 int , IN n2 int)
+begin
+select (n1%n2) as percentage;
+end&&
+delimiter ;
+delimiter **
+create procedure floor_div(IN n1 int, IN n2 int)
+begin
+select floor(n1/n2) as floor_div;
+end**
+delimiter ;
+delimiter !!
+create procedure arthematic (IN n1 int,IN n2 int)
+begin
+call sum_two(n1,n2);
+call diff_two(n1,n2);
+call mul_two(n1,n2);
+call divsion(n1,n2);
+call percentage(n1,n2);
+call floor_div(n1,n2);
+end!!
+delimiter ;
+call arthematic(2,7);
