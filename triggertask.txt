@@ -1,0 +1,52 @@
+//inserting different messages into another table on different triggering events (insert, update, delete) on a different table by using triggers .
+
+use 37r;
+create table dependency (id int primary key auto_increment,msg varchar (200));
+desc dependency;
+delimiter $$
+create trigger is_added
+after insert on college
+for each row
+begin
+insert into dependency (msg) values ("a new college is added");
+end $$
+delimiter ;
+select * from college;
+insert into college values("jntu","kkd",206);
+select * from dependency;
+delimiter %%
+create trigger is_being_updated 
+after update on college
+for each row
+begin
+insert into dependency (msg) values ("this college is being updated");
+end %%
+delimiter ;
+update college set id=205 where name="jntu";
+set sql_safe_updates=0;
+delimiter ^^
+create trigger is_deleted
+before delete on college
+for each row
+begin 
+insert into dependency (msg) values ("someone is deleting a college");
+end ^^
+delimiter ;
+delete from college where location="tamilnadu";
+select * from college;
++------------+-----------+------+
+| name       | location  | id   |
++------------+-----------+------+
+| klu        | vijaywada |  202 |
+| lpu        | punjab    |  203 |
+| mallareddy | hyderabad |  204 |
+| jntu       | kkd       |  205 |
++------------+-----------+------+
+select * from dependency;
++----+-------------------------------+
+| id | msg                           |
++----+-------------------------------+
+|  1 | a new college is added        |
+|  2 | this college is being updated |
+|  3 | someone is deleting a college |
++----+-------------------------------+
